@@ -7,10 +7,7 @@ export function greetUsers(customers) {
     // just map over them to make a greeting
     const userGreetings = customers.map(customer => {
         return `Hello ${customer.first_name} ${customer.last_name}!`;
-
     });
-   
-   
     return userGreetings;
 }
 
@@ -20,7 +17,13 @@ Output:
 */
 
 export function greetUsersOverAge60(customers) {
-    return customers;
+
+    const userGreetings = customers
+        .filter(customer => customer.age >= 60)
+        .map(customer => {
+            return `Hello ${customer.first_name} ${customer.last_name}!`;
+        });
+    return userGreetings;
        // first, filter over the user to get the ones over 60
        // then map over them to make a greeting
 }
@@ -59,7 +62,14 @@ Output:
 */
 
 export function getTotalOfEachGender(customers) {
-    return true;
+    return customers.reduce((acc, customer) => {
+        if(acc[customer.gender]) {
+            acc[customer.gender]++;
+        } else {
+            acc[customer.gender] = 1;
+        }
+        return acc;
+    }, {});
 }
 
 /* 
@@ -73,7 +83,17 @@ Output:
 */
 
 export function getGenderBreakdownOfFordOwners(customers) {
-    return true;
+
+    return customers
+        .filter(customer => customer.car_make === 'Ford')
+        .reduce((acc, customer) => {
+            if(acc[customer.gender]){
+                acc[customer.gender]++;
+            } else {
+                acc[customer.gender] = 1;
+            }
+            return acc;
+        }, {});
 }
 
 /* 
